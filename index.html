@@ -173,49 +173,35 @@
   
   <!-- JavaScript for countdown timer -->
   <script>
-    // Vérifier si une date cible est déjà stockée
-    let targetDate = localStorage.getItem('targetDate');
-    if (!targetDate) {
-      // Si aucune date n'est stockée, la définir à 30 jours à partir de maintenant
-      let now = new Date();
-      now.setDate(now.getDate() + 30);
-      targetDate = now.toISOString();
-      localStorage.setItem('targetDate', targetDate);
-    } else {
-      targetDate = new Date(targetDate);
-    }
+    const targetDate = new Date('2025-04-30T00:00:00');
     
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
     
       if (diff <= 0) {
-        // Le compte à rebours est terminé
-        document.getElementById('days').textContent = "0";
-        document.getElementById('hours').textContent = "0";
-        document.getElementById('minutes').textContent = "0";
-        document.getElementById('seconds').textContent = "0";
+        document.getElementById('days').textContent = 0;
+        document.getElementById('hours').textContent = 0;
+        document.getElementById('minutes').textContent = 0;
+        document.getElementById('seconds').textContent = 0;
         clearInterval(timerInterval);
         return;
       }
     
-      // Calcul des jours, heures, minutes et secondes
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
     
-      // Mise à jour du DOM
       document.getElementById('days').textContent = days;
       document.getElementById('hours').textContent = hours;
       document.getElementById('minutes').textContent = minutes;
       document.getElementById('seconds').textContent = seconds;
     }
     
-    // Mettre à jour le compte à rebours toutes les secondes
     const timerInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
-    </script>
+    </script>    
     
 </section>
 </div>
